@@ -1,35 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Chaeson Sears II</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Github, FileText, ExternalLink } from "lucide-react";
 
-<body style="font-family:Arial; text-align:center; padding:40px;">
+export default function Portfolio() {
+  const projects = [
+    {
+      title: "Project Title 1",
+      description: "Short description of the robot/system. Add technical details here.",
+      image: "https://via.placeholder.com/600x400",
+      github: "https://github.com/your-repo",
+      cad: "https://example.com/cad-link",
+      video: "https://youtube.com"
+    },
+    {
+      title: "Project Title 2",
+      description: "Short description of your second project.",
+      image: "https://via.placeholder.com/600x400",
+      github: "https://github.com/your-repo",
+      cad: "https://example.com/cad-link",
+      video: "https://youtube.com"
+    }
+  ];
 
-<h1>Chaeson Sears II</h1>
-<h2>Mechanical Engineer | Robotics</h2>
+  return (
+    <div className="min-h-screen bg-gray-50 p-8">
+      {/* Header */}
+      <div className="max-w-5xl mx-auto text-center mb-12">
+        <motion.h1 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl font-bold mb-4"
+        >
+          Chaeson Sears II
+        </motion.h1>
+        <p className="text-lg text-gray-600 mb-6">
+          Robotics Engineer | Mechanical Design | Control Systems
+        </p>
+        <Button className="mr-4">
+          <FileText className="mr-2 h-4 w-4" />
+          View Resume PDF
+        </Button>
+        <Button variant="outline">
+          <Github className="mr-2 h-4 w-4" />
+          GitHub
+        </Button>
+      </div>
 
-<p>Robotics engineer specializing in robotic manipulation, medical devices, and electromechanical systems.</p>
+      {/* Projects Section */}
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+        {projects.map((project, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.02 }}
+          >
+            <Card className="rounded-2xl shadow-lg">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="rounded-t-2xl w-full h-56 object-cover"
+              />
+              <CardContent className="p-6">
+                <h2 className="text-2xl font-semibold mb-2">
+                  {project.title}
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  {project.description}
+                </p>
 
-<h2>Projects</h2>
+                <div className="flex flex-wrap gap-3">
+                  <Button size="sm" asChild>
+                    <a href={project.github} target="_blank">
+                      <Github className="mr-2 h-4 w-4" />
+                      Code
+                    </a>
+                  </Button>
 
-<p>Spyder Bot Quadruped Robot</p>
-<p>Voice-Controlled Prosthetic Hand</p>
-<p>WALL-E Kinematic System</p>
-<p>OpenCap Motion Capture Research</p>
-<p>Speed Reduction Gearbox FEA</p>
+                  <Button size="sm" variant="outline" asChild>
+                    <a href={project.cad} target="_blank">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      CAD Model
+                    </a>
+                  </Button>
 
-<h2>Portfolio</h2>
+                  <Button size="sm" variant="secondary" asChild>
+                    <a href={project.video} target="_blank">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Demo Video
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
 
-<a href="Chaeson-Portfolio.pdf" target="_blank">
-<button style="padding:10px 20px;font-size:16px;">View Full Portfolio</button>
-</a>
-
-<h2>Contact</h2>
-
-<p>Email: chaesearsii@gmail.com</p>
-<p>LinkedIn: linkedin.com/in/chaeson-sears</p>
-
-</body>
-</html>
+      {/* CAD Embed Section Example */}
+      <div className="max-w-5xl mx-auto mt-16">
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          CAD & Design Work
+        </h2>
+        <div className="aspect-video">
+          <iframe
+            className="w-full h-full rounded-2xl shadow-lg"
+            src="https://example.com"
+            title="CAD Embed"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
